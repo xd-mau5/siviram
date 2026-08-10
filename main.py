@@ -248,11 +248,6 @@ with tab_mapa:
         for i, (nombre, tile) in enumerate(tiles_opciones.items()):
             folium.TileLayer(tiles=tile, name=nombre, show=(i == 0)).add_to(m)
 
-        # ── Capa de etiquetas con el nombre de los municipios ──
-        fg_etiquetas = folium.FeatureGroup(
-            name="🏷️ Nombres municipios", show=True
-        ).add_to(m)
-
         for _, row in df_map.iterrows():
             color = colores.get(row["nivel_riesgo"], "#999")
             popup = f"""<div style='font-family:Calibri;width:220px'>
@@ -275,26 +270,12 @@ with tab_mapa:
                 popup=folium.Popup(popup, max_width=250),
                 tooltip=row["municipio"],
             ).add_to(m)
-            folium.Marker(
-                location=[row["lat"], row["lon"]],
-                icon=folium.DivIcon(
-                    html=(
-                        f"<div style='font-size:10px;font-weight:bold;color:#1B3A5C;"
-                        f"background:rgba(255,255,255,0.85);border-radius:3px;padding:1px 4px;"
-                        f"white-space:nowrap;box-shadow:0 0 2px rgba(0,0,0,0.3);'>"
-                        f"{row['municipio']}</div>"
-                    ),
-                    icon_size=(150, 16),
-                    icon_anchor=(75, 16),
-                ),
-            ).add_to(fg_etiquetas)
 
         folium.LayerControl(collapsed=True).add_to(m)
         folium_static(m, width=700, height=450)
         st.caption(
             "Usa el botón de capas (arriba a la derecha del mapa) para cambiar el estilo "
-            "del mapa y activar/desactivar las etiquetas. Todo se alterna en el cliente, "
-            "sin recargar el dashboard."
+            "del mapa. Todo se alterna en el cliente, sin recargar el dashboard."
         )
 
     with col_info:
