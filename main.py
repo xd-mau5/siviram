@@ -4,7 +4,7 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import folium
-from streamlit_folium import folium_static
+from streamlit_folium import st_folium
 
 st.set_page_config(page_title="SIVIRAM — Dashboard Demo", layout="wide", page_icon="🛡️")
 
@@ -272,7 +272,7 @@ with tab_mapa:
             ).add_to(m)
 
         folium.LayerControl(collapsed=True).add_to(m)
-        folium_static(m, width=700, height=450)
+        st_folium(m, width=700, height=450, returned_objects=[])
         st.caption(
             "Usa el botón de capas (arriba a la derecha del mapa) para cambiar el estilo "
             "del mapa. Todo se alterna en el cliente, sin recargar el dashboard."
