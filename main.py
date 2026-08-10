@@ -4,7 +4,7 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import folium
-from streamlit_folium import st_folium
+from streamlit_folium import folium_static
 
 st.set_page_config(page_title="SIVIRAM — Dashboard Demo", layout="wide", page_icon="🛡️")
 
@@ -252,7 +252,7 @@ with tab_mapa:
                 fill_opacity=0.7,
                 popup=folium.Popup(popup, max_width=250),
             ).add_to(m)
-        st_folium(m, width=700, height=450)
+        folium_static(m, width=700, height=450)
 
     with col_info:
         st.markdown("**Resumen de riesgo**")
