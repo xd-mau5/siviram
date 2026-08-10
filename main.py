@@ -270,7 +270,7 @@ with tab_mapa:
             legend=dict(orientation="h", y=-0.1),
         )
         fig_pie.update_traces(textinfo="percent+label", textfont_size=12)
-        st.plotly_chart(fig_pie, use_container_width=True)
+        st.plotly_chart(fig_pie, width="stretch")
 
         st.markdown("**Top 5 municipios:**")
         for _, r in df_map.nlargest(5, "resistencia_pct").iterrows():
@@ -301,7 +301,7 @@ with tab_tendencia:
             },
         )
         fig_t.update_layout(height=350, legend=dict(orientation="h", y=-0.2))
-        st.plotly_chart(fig_t, use_container_width=True)
+        st.plotly_chart(fig_t, width="stretch")
     with c2:
         st.markdown("**Resistencia por antimicrobiano**")
         df_am = (
@@ -320,7 +320,7 @@ with tab_tendencia:
         fig_am.update_layout(
             height=350, xaxis_tickangle=-45, legend=dict(orientation="h", y=-0.25)
         )
-        st.plotly_chart(fig_am, use_container_width=True)
+        st.plotly_chart(fig_am, width="stretch")
 
 # ── TAB 3: CORRELACIONES ──
 with tab_corr:
@@ -341,7 +341,7 @@ with tab_corr:
             df_corr, text_auto=".2f", color_continuous_scale="RdBu_r", aspect="auto"
         )
         fig_corr.update_layout(height=400)
-        st.plotly_chart(fig_corr, use_container_width=True)
+        st.plotly_chart(fig_corr, width="stretch")
     with c2:
         st.markdown("**Resistencia vs Precipitación**")
         fig_s = px.scatter(
@@ -354,7 +354,7 @@ with tab_corr:
             color_discrete_sequence=px.colors.qualitative.Set2,
         )
         fig_s.update_layout(height=400)
-        st.plotly_chart(fig_s, use_container_width=True)
+        st.plotly_chart(fig_s, width="stretch")
 
 # ── TAB 4: SHAP ──
 with tab_shap:
@@ -391,7 +391,7 @@ with tab_shap:
         xaxis_title="Contribución al riesgo (SHAP)",
         xaxis=dict(zeroline=True, zerolinecolor="gray"),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     c1, c2 = st.columns(2)
     c1.info("🔴 **Mayor densidad ganadera** → Mayor riesgo de resistencia")
